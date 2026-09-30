@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The Corner Pantry &mdash; Neighborhood Provisions</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Decorative background -->
+    <div class="blob blob-one"></div>
+    <div class="blob blob-two"></div>
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <div class="logo">
+            <div class="logo-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 10h16v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V10z"/>
+                    <path d="M2 10l2-6h16l2 6"/>
+                    <path d="M9 10v4"/>
+                    <path d="M15 10v4"/>
+                </svg>
+            </div>
+
+            <div>
+                <h1>Billi<span>Fy</span></h1>
+                <p>Counter Register</p>
+            </div>
+        </div>
+
+    </header>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+
+        <!-- INTRO -->
+        <section class="welcome">
+
+            <div>
+                <h2>
+                    Everyday goods<br>
+                    <span>Packed with care.</span>
+                </h2>
+
+                <p class="welcome-text">
+                    Browse pantry staples, assemble customer orders, and manage inventory seamlessly at the register counter.
+                </p>
+            </div>
+
+            <div class="date-card">
+                <span>Register Date</span>
+                <strong id="currentDate">29 September 2026</strong>
+            </div>
+
+        </section>
+
+
+        <!-- SUMMARY -->
+        <section class="summary">
+
+            <div class="summary-card">
+                <div class="summary-icon blue">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                </div>
+                <div>
+                    <p>Total Products</p>
+                    <h3 id="productCount">6</h3>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <div class="summary-icon green">₹</div>
+                <div>
+                    <p>Running Total</p>
+                    <h3 id="billAmount">₹0.00</h3>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <div class="summary-icon orange">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                        <line x1="12" y1="9" x2="12" y2="13"></line>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                </div>
+                <div>
+                    <p>Low Stock Items</p>
+                    <h3 id="lowStock">0</h3>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- MAIN GRID -->
+        <section class="main-grid">
+
+            <!-- PRODUCTS -->
+            <div class="products-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <p class="small-title">STORE SHELVES</p>
+                        <h3>Available Provisions</h3>
+                    </div>
+
+                    <div class="search-box">
+                        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Search provisions..."
+                            onkeyup="searchProducts()"
+                        >
+                    </div>
+
+                </div>
+
+                <!-- CATEGORY FILTER CHIPS -->
+                <div class="category-filters" id="categoryFilters">
+                    <button class="filter-chip active" onclick="filterCategory('All')">All Items</button>
+                    <button class="filter-chip" onclick="filterCategory('Grains')">Grains</button>
+                    <button class="filter-chip" onclick="filterCategory('Dairy')">Dairy</button>
+                    <button class="filter-chip" onclick="filterCategory('Bakery')">Bakery</button>
+                    <button class="filter-chip" onclick="filterCategory('Snacks')">Snacks</button>
+                    <button class="filter-chip" onclick="filterCategory('Beverages')">Beverages</button>
+                </div>
+
+
+                <div class="product-grid" id="productGrid">
+
+                    <!-- Products generated by JavaScript -->
+
+                </div>
+
+            </div>
+
+
+            <!-- BILL -->
+            <aside class="bill-card">
+
+                <div class="bill-top">
+
+                    <div>
+                        <p class="small-title">COUNTER REGISTER</p>
+                        <h3>Current Order</h3>
+                    </div>
+
+                    <div class="bill-top-actions">
+                        <button class="clear-cart-btn" id="clearCartBtn" onclick="clearCart()" title="Clear order" style="display: none;">
+                            Clear
+                        </button>
+                        <div class="receipt-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"></path>
+                                <line x1="8" y1="7" x2="16" y2="7"></line>
+                                <line x1="8" y1="11" x2="16" y2="11"></line>
+                                <line x1="8" y1="15" x2="13" y2="15"></line>
+                            </svg>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- CART -->
+                <div class="cart" id="cart">
+
+                    <div class="empty-cart">
+
+                        <div class="empty-icon">
+                            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                                <line x1="3" y1="6" x2="21" y2="6"></line>
+                                <path d="M16 10a4 4 0 0 1-8 0"></path>
+                            </svg>
+                        </div>
+
+                        <h4>Your order is empty</h4>
+
+                        <p>
+                            Add provisions from the shelves to start billing.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BILL CALCULATION -->
+                <div class="bill-calculation">
+
+                    <div class="bill-row">
+                        <span>Subtotal</span>
+                        <strong id="subtotal">₹0.00</strong>
+                    </div>
+
+
+                    <div class="discount-row">
+
+                        <span>Store Discount</span>
+
+                        <select id="discount" onchange="calculateBill()">
+                            <option value="0">No Discount</option>
+                            <option value="5">5% Member Discount</option>
+                            <option value="10">10% Seasonal Offer</option>
+                            <option value="15">15% Staff / Festive</option>
+                            <option value="20">20% Wholesale Promo</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="bill-row discount-value">
+                        <span>Customer Savings</span>
+                        <strong id="discountAmount">₹0.00</strong>
+                    </div>
+
+
+                    <div class="total-row">
+                        <span>Total Payable</span>
+                        <strong id="total">₹0.00</strong>
+                    </div>
+
+                </div>
+
+
+                <button class="generate-btn" onclick="generateBill()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    Complete Sale &amp; Print Slip
+                </button>
+
+            </aside>
+
+        </section>
+
+
+        <!-- INVENTORY -->
+        <section class="inventory-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="small-title">STOCK ROOM</p>
+                    <h3>Live Pantry Inventory</h3>
+                </div>
+
+                <span class="inventory-label">
+                    Pantry Status
+                </span>
+
+            </div>
+
+
+            <div class="inventory-table">
+
+                <div class="table-header">
+                    <span>Product</span>
+                    <span>Category</span>
+                    <span>Price</span>
+                    <span>In Stock</span>
+                    <span>Status</span>
+                </div>
+
+                <div id="inventoryList">
+
+                    <!-- Inventory generated by JavaScript -->
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <p>
+            @ The Corner Pantry
+        </p>
+
+    </footer>
+
+
+    <!-- RECEIPT MODAL -->
+    <div class="modal-backdrop" id="receiptModal" style="display: none;">
+        <div class="receipt-paper">
+            <div class="receipt-header">
+                <div class="receipt-logo">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 10h16v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V10z"/>
+                        <path d="M2 10l2-6h16l2 6"/>
+                    </svg>
+                </div>
+                <h4>THE CORNER PANTRY</h4>
+                <p class="receipt-store-info">Neighborhood Grocers &amp; Provisions</p>
+                <div class="receipt-meta-grid">
+                    <div><span>Receipt:</span> <strong id="modalReceiptId">#CP-1001</strong></div>
+                    <div><span>Date:</span> <strong id="modalReceiptDate">29 Sep 2026</strong></div>
+                </div>
+            </div>
+
+            <div class="receipt-zigzag"></div>
+
+            <div class="receipt-items-container">
+                <div class="receipt-items-header">
+                    <span>Item</span>
+                    <span>Qty</span>
+                    <span>Price</span>
+                    <span style="text-align: right;">Total</span>
+                </div>
+                <div id="modalReceiptItems">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <div class="receipt-divider"></div>
+
+            <div class="receipt-breakdown">
+                <div class="receipt-line">
+                    <span>Subtotal</span>
+                    <strong id="modalSubtotal">₹0.00</strong>
+                </div>
+                <div class="receipt-line" id="modalDiscountRow">
+                    <span>Discount</span>
+                    <strong id="modalDiscount">₹0.00</strong>
+                </div>
+                <div class="receipt-line receipt-grand-total">
+                    <span>TOTAL PAID</span>
+                    <strong id="modalTotal">₹0.00</strong>
+                </div>
+            </div>
+
+            <div class="receipt-footer-notes">
+                <p>Thank you for supporting your local grocer!</p>
+                <p class="barcode">||| | ||||| || ||| |||| || |||</p>
+            </div>
+
+            <div class="receipt-modal-actions no-print">
+                <button class="receipt-btn btn-secondary" onclick="closeReceiptModal()">
+                    New Sale
+                </button>
+                <button class="receipt-btn btn-primary" onclick="printReceipt()">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                        <rect x="6" y="14" width="12" height="8"></rect>
+                    </svg>
+                    Print Slip
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toastContainer" class="toast-container"></div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
